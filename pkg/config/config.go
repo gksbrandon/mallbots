@@ -1,6 +1,7 @@
 package config
 
 import (
+	"mallbots/pkg/rpc"
 	"os"
 
 	"github.com/kelseyhightower/envconfig"
@@ -16,6 +17,7 @@ type (
 		Environment string
 		LogLevel    string `envconfig:"LOG_LEVEL" default:"DEBUG"`
 		Postgres    PostgresConfig
+		Rpc         rpc.RpcConfig
 	}
 )
 

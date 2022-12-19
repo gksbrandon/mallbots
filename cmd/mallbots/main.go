@@ -5,7 +5,11 @@ import (
 	"fmt"
 	"mallbots/pkg/config"
 	"mallbots/pkg/logger"
+	"mallbots/pkg/rpc"
 	"os"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 func main() {
@@ -42,5 +46,15 @@ func run() (err error) {
 		}
 	}(app.database)
 
+	// Initialize RPC
+	app.rpc = initRpc(app.cfg.Rpc)
+
 	return nil
+}
+
+func initRpc(_ rpc.RpcConfig) *grpc.Server {
+	server := grpc.NewServer()
+	reflection.Register(server)
+
+	return server
 }
