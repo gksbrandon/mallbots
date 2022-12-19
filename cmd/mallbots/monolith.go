@@ -1,7 +1,12 @@
 package main
 
-import "mallbots/pkg/config"
+import (
+	"mallbots/pkg/config"
 
-type app struct {
-	cfg config.AppConfig
+	"github.com/rs/zerolog"
+)
+
+type monolith struct {
+	cfg    config.AppConfig
+	logger zerolog.Logger
 }

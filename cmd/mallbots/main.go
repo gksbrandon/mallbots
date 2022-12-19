@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"mallbots/pkg/config"
+	"mallbots/pkg/logger"
 	"os"
 )
 
@@ -14,14 +15,20 @@ func main() {
 }
 
 func run() (err error) {
-	var monolith app
+	var app monolith
 
 	// Parse configuration
 	cfg, err := config.InitConfig()
 	if err != nil {
 		return err
 	}
-	monolith.cfg = cfg
+	app.cfg = cfg
+
+	// Initialize logger
+	app.logger = logger.New(logger.LogConfig{
+		Environment: cfg.Environment,
+		LogLevel:    logger.Level(cfg.LogLevel),
+	})
 
 	return nil
 }

@@ -14,6 +14,7 @@ type (
 
 	AppConfig struct {
 		Environment string
+		LogLevel    string `envconfig:"LOG_LEVEL" default:"DEBUG"`
 	}
 )
 
