@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  monolith:
+    container_name: monolith
+    hostname: monolith
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - '8080:8080'
+    env_file:
+      - zarf/docker/.env
