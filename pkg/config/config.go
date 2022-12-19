@@ -8,13 +8,14 @@ import (
 )
 
 type (
-	PGConfig struct {
+	PostgresConfig struct {
 		Conn string `required:"true"`
 	}
 
 	AppConfig struct {
 		Environment string
 		LogLevel    string `envconfig:"LOG_LEVEL" default:"DEBUG"`
+		Postgres    PostgresConfig
 	}
 )
 

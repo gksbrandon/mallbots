@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"mallbots/pkg/config"
 	"mallbots/pkg/logger"
@@ -18,17 +19,28 @@ func run() (err error) {
 	var app monolith
 
 	// Parse configuration
-	cfg, err := config.InitConfig()
+	app.cfg, err = config.InitConfig()
 	if err != nil {
 		return err
 	}
-	app.cfg = cfg
 
 	// Initialize logger
 	app.logger = logger.New(logger.LogConfig{
-		Environment: cfg.Environment,
-		LogLevel:    logger.Level(cfg.LogLevel),
+		Environment: app.cfg.Environment,
+		LogLevel:    logger.Level(app.cfg.LogLevel),
 	})
+
+	// Initialize database
+	app.database, err = sql.Open("pgx", app.cfg.Postgres.Conn)
+	if err != nil {
+		return err
+	}
+	defer func(db *sql.DB) {
+		err := db.Close()
+		if err != nil {
+			return
+		}
+	}(app.database)
 
 	return nil
 }
