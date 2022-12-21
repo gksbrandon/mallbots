@@ -16,7 +16,7 @@ RUN go build -v -o monolith ./cmd/mallbots
 
 FROM alpine:latest AS runtime
 
-COPY --from=builder /mallbots/docker/wait-for .
+COPY --from=builder /mallbots/zarf/docker/wait-for .
 RUN chmod +x /wait-for
 
 # Copy the binary to the production image from the builder stage.

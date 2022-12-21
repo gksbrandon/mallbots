@@ -8,6 +8,7 @@ import (
 	"mallbots/pkg/rpc"
 	"os"
 
+	_ "github.com/jackc/pgx/v4/stdlib"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -20,6 +21,7 @@ func main() {
 }
 
 func run() (err error) {
+	// Configure application dependencies
 	var app monolith
 
 	// Parse configuration
