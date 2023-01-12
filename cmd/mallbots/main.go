@@ -56,6 +56,8 @@ func run() (err error) {
 
 func initRpc(_ rpc.RpcConfig) *grpc.Server {
 	server := grpc.NewServer()
+
+	// Reflection to allow runtime introspection of server protos eg. with gRPCurl
 	reflection.Register(server)
 
 	return server
