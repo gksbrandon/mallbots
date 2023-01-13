@@ -3,11 +3,13 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"mallbots/pkg/config"
-	"mallbots/pkg/logger"
-	"mallbots/pkg/rpc"
+	"mallbots/internal/config"
+	"mallbots/internal/logger"
+	"mallbots/internal/rpc"
+	"mallbots/internal/web"
 	"os"
 
+	"github.com/go-chi/chi/v5"
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -51,6 +53,9 @@ func run() (err error) {
 	// Initialize RPC
 	app.rpc = initRpc(app.cfg.Rpc)
 
+	// Initialize Mux
+	app.mux = initMux(app.cfg.Web)
+
 	return nil
 }
 
@@ -61,4 +66,8 @@ func initRpc(_ rpc.RpcConfig) *grpc.Server {
 	reflection.Register(server)
 
 	return server
+}
+
+func initMux(_ web.WebConfig) *chi.Mux {
+	return chi.NewMux()
 }

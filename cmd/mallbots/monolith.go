@@ -2,8 +2,9 @@ package main
 
 import (
 	"database/sql"
-	"mallbots/pkg/config"
+	"mallbots/internal/config"
 
+	"github.com/go-chi/chi/v5"
 	"github.com/rs/zerolog"
 	"google.golang.org/grpc"
 )
@@ -13,4 +14,5 @@ type monolith struct {
 	logger   zerolog.Logger
 	database *sql.DB
 	rpc      *grpc.Server
+	mux      *chi.Mux
 }

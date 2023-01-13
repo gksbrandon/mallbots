@@ -1,7 +1,8 @@
 package config
 
 import (
-	"mallbots/pkg/rpc"
+	"mallbots/internal/rpc"
+	"mallbots/internal/web"
 	"os"
 
 	"github.com/kelseyhightower/envconfig"
@@ -18,6 +19,7 @@ type (
 		LogLevel    string `envconfig:"LOG_LEVEL" default:"DEBUG"`
 		Postgres    PostgresConfig
 		Rpc         rpc.RpcConfig
+		Web         web.WebConfig
 	}
 )
 
