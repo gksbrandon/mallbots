@@ -20,10 +20,7 @@ dc-up:
 dc-down:
 	docker-compose down --rmi all
 
-dc-build:
-	docker-compose build monolith
-
-dc-reset: compose-down compose-up
+dc-reset: dc-down dc-up
 
 dc-update:
 	docker-compose down
@@ -32,4 +29,3 @@ dc-update:
 
 dc-logs:
 	docker-compose logs -f
-
